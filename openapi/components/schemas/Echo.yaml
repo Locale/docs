@@ -1,0 +1,4 @@
+type: object
+properties:
+  data:
+    $ref: ./Echo_data.yaml

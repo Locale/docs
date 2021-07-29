@@ -1,0 +1,27 @@
+get:
+  tags:
+    - Job
+  summary: Get translation job by id.
+  description: |
+    Retrieve a translation job by its id.
+  operationId: getJobById
+  parameters:
+    - name: id
+      in: path
+      description: Unique identifier for the object.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '404':
+      description: Job Id not found
+  security:
+    - bearerAuth: []

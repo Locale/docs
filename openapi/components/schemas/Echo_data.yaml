@@ -1,0 +1,6 @@
+type: object
+properties:
+  type:
+    type: string
+  attributes:
+    $ref: ./Echo_data_attributes.yaml

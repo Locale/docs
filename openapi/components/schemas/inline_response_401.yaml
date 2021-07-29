@@ -1,0 +1,7 @@
+type: object
+properties:
+  errors:
+    minItems: 1
+    type: array
+    items:
+      $ref: ./inline_response_401_errors.yaml

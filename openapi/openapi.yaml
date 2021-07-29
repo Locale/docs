@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: Locale API
+  description: >-
+    The Locale API allows you to easily translate any content with only 2 API
+    calls!
+
+
+    1. Send your content to be translated.
+
+
+    2. Download the translations when the job is done!
+  version: 1.0.0-oas3
+servers:
+  - url: 'https://api.locale.to/v1'
+tags:
+  - name: Auth
+    description: >
+      The Locale API uses API keys to authenticate requests. You can view and
+      manage your API keys in the Settings of your projects.
+
+
+      Test mode secret keys have the prefix sk_test_ and live mode secret keys
+      have the prefix sk_live_.
+
+      Your API keys carry many privileges, so be sure to keep them secure! Do
+      not share your secret API keys in publicly accessible areas such as
+      GitHub, client-side code, and so forth.
+
+
+      Authentication to the API is performed via HTTP Bearer Auth. Use `-H
+      "Authorization: Bearer sk_test_YOUR_SECRET_KEY"`.
+
+
+      All API requests must be made over HTTPS. Calls made over plain HTTP will
+      fail. API requests without authentication will also fail.
+
+
+      An API key is associated to a single project.
+  - name: Job
+    description: >
+      `Job` objects allow you to perform translation based on the project
+      configuration associated to your API key. The API allows you to create,
+      and retrieve individual jobs as well as list all your jobs.
+
+
+      Jobs are identified by a unique, random ID.
+paths:
+  /echo:
+    $ref: paths/echo.yaml
+  /jobs:
+    $ref: paths/jobs.yaml
+  '/jobs/{id}':
+    $ref: 'paths/jobs@{id}.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: authorization
+      in: header

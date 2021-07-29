@@ -1,0 +1,21 @@
+get:
+  tags:
+    - Auth
+  summary: Authorization echo
+  description: Return a 200 HTTP status code if the authentication is correct.
+  operationId: authEcho
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Echo.yaml
+    '401':
+      description: Invalid api key
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/inline_response_401.yaml
+  security:
+    - bearerAuth: []

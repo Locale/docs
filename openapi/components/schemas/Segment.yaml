@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: string
+    description: An id identifying uniquely a segment in a localeCode.
+    example: page.home.title
+  value:
+    type: string
+    description: The value to translate or to proofread.
+    example: Good morning
+  localeCode:
+    type: string
+    description: The code of your Locale project's languages.
+    example: en-US
