@@ -1,8 +1,9 @@
 get:
   tags:
-    - Auth
-  summary: Authorization echo
-  description: Return a 200 HTTP status code if the authentication is correct.
+    - System
+  summary: Echo
+  description: >
+    This is a dummy endpoint you can use to test if the server is accessible or to validate your credentials.
   operationId: authEcho
   responses:
     '200':

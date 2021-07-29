@@ -1,4 +1,6 @@
 type: object
 properties:
-  data:
-    $ref: ./Echo_data.yaml
+  livemode:
+    type: boolean
+    description: Has the value true if the request is in live mode or the value false if the request is in test mode.
+

@@ -1,0 +1,36 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: job_RH4lg43DvWW
+  object:
+    type: string
+    enum:
+      - job
+  status:
+    type: string
+    enum:
+      - delivered
+      - error
+      - inProgress
+  segments:
+    type: object
+    properties:
+      object:
+        type: string
+        enum:
+          - list
+      data:
+        type: array
+        items:
+          $ref: ./Segment.yaml
+
+  links:
+    type: object
+    properties:
+      download:
+        type: string
+        format: url
+        description: The URL to download the job result.
+        example:

@@ -1,10 +1,8 @@
 post:
   tags:
     - Job
-  summary: Submit a new translation job.
+  summary: Create a translation job.
   description: >
-    # Job creation
-
     Trigger a new translation that will be processed in all languages set up on
     your project.
   operationId: createJob
@@ -14,36 +12,40 @@ post:
         schema:
           $ref: ../components/schemas/JobRequest.yaml
         example:
-          data:
-            type: jobs
-            attributes:
-              segments:
-                - id: product#1#name
-                  value: ACME DIY Tornado Kit
-                  localeCode: en-US
-                - id: product#1#description
-                  value: >-
-                    Easily create your own tornadoes, anywhere, with the ACME Do
-                    It Yourself Tornado kit
-                  localeCode: en-US
-                - id: product#2#name
-                  value: ACME Birdseed
-                  localeCode: en-US
-                - id: product#2#description
-                  value: >-
-                    Comes in all shapes, sizes, and flavors, providing lots of
-                    opportunites to keep your favorite flying friends happy.
-                    Placing ACME Birdseed on a railroad crossing is NOT advised
-                  localeCode: en-US
+          segments:
+            - id: product#1#name
+              value: ACME DIY Tornado Kit
+              localeCode: en-US
+            - id: product#1#description
+              value: >-
+                Easily create your own tornadoes, anywhere, with the ACME Do
+                It Yourself Tornado kit
+              localeCode: en-US
+            - id: product#2#name
+              value: ACME Birdseed
+              localeCode: en-US
+            - id: product#2#description
+              value: >-
+                Comes in all shapes, sizes, and flavors, providing lots of
+                opportunites to keep your favorite flying friends happy.
+                Placing ACME Birdseed on a railroad crossing is NOT advised
+              localeCode: en-US
     required: true
   responses:
     '201':
-      description: job created
+      description: Job successfully created.
+      x-summary: Created
       content:
         application/json:
           schema:
             $ref: ../components/schemas/JobResponse.yaml
+          example:
+              id: job_RH4lg43DvWW
+              object: job
+              status: inProgress
+              livemode: true
     '400':
       description: Invalid data
+      x-summary: Bad Request
   security:
     - bearerAuth: []

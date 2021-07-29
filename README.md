@@ -1,4 +1,11 @@
 # Locale API OpenAPI Definition
+## Building your OpenAPI doc
+
+In the project root folder, run the command:
+```
+npm run build && mv dist.yaml dist && npx redoc-cli bundle dist/dist.yaml --options.theme.colors.primary.main=#00d792 &&  mv redoc-static.html index.html && mv index.html docs/
+```
+Commit and push.
 
 ## Working on your OpenAPI Definition
 

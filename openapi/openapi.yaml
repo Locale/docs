@@ -1,42 +1,56 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Locale API
-  description: >-
-    The Locale API allows you to easily translate any content with only 2 API
-    calls!
+  description: >
+    # Introduction
+     
+    The Locale API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
 
-    1. Send your content to be translated.
+    You can use the Locale API in test mode, which does not affect your live data or interact with real translators. The API key you use to authenticate the request determines whether the request is live mode or test mode.
+
+    # Authentication
+
+    The Locale API uses API keys to authenticate requests. You can view and
+    manage your API keys in the Settings of your projects.
 
 
-    2. Download the translations when the job is done!
-  version: 1.0.0-oas3
+    Test mode secret keys have the prefix `sk_test_` and live mode secret keys
+    have the prefix `sk_live_`.
+
+
+    Your API keys carry many privileges, so be sure to keep them secure! Do
+    not share your secret API keys in publicly accessible areas such as
+    GitHub, client-side code, and so forth.
+
+
+    Authentication to the API is performed via HTTP Bearer Auth. Use `-H
+    "Authorization: Bearer sk_test_YOUR_SECRET_KEY"`.
+
+
+    All API requests must be made over HTTPS. Calls made over plain HTTP will
+    fail. API requests without authentication will also fail.
+
+
+    An API key is associated to a single project.
+
+    # Error
+
+    Locale uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, etc.). Codes in the 5xx range indicate an error with Locale's servers.
+  version: 1.0.0
+  x-logo:
+    url: "https://static.locale.to/images/docs/logo.png"
+    backgroundColor: "#FFFFFF"
+    altText: "Locale logo"
 servers:
   - url: 'https://api.locale.to/v1'
+x-tagGroups:
+  - name: API calls
+    tags:
+      - Job
+      - Job Result
+      - System
 tags:
-  - name: Auth
-    description: >
-      The Locale API uses API keys to authenticate requests. You can view and
-      manage your API keys in the Settings of your projects.
-
-
-      Test mode secret keys have the prefix sk_test_ and live mode secret keys
-      have the prefix sk_live_.
-
-      Your API keys carry many privileges, so be sure to keep them secure! Do
-      not share your secret API keys in publicly accessible areas such as
-      GitHub, client-side code, and so forth.
-
-
-      Authentication to the API is performed via HTTP Bearer Auth. Use `-H
-      "Authorization: Bearer sk_test_YOUR_SECRET_KEY"`.
-
-
-      All API requests must be made over HTTPS. Calls made over plain HTTP will
-      fail. API requests without authentication will also fail.
-
-
-      An API key is associated to a single project.
   - name: Job
     description: >
       `Job` objects allow you to perform translation based on the project
@@ -45,6 +59,49 @@ tags:
 
 
       Jobs are identified by a unique, random ID.
+  - name: Job Result
+    x-traitTag: true
+    description: >
+      ```
+
+      {
+        "id": "job_RH4lg43DvWW",
+        "object": "job",
+        "status": "delivered",
+        "livemode" true,
+        "segments": {
+          "object": "list",
+          "data": [
+            {
+              "id": "product#1#name",
+              "object": "segment",
+              "value": "ACME DIY Tornado Kit",
+              "localeCode": "en-US"
+            },
+            {
+              "id": "product#1#name",
+              "object": "segment",
+              "value": "Kit de Tornade DIY ACME",
+              "localeCode": "fr"
+            },
+            {
+              "id": "product#1#description",
+              "object": "segment",
+              "value": "Easily create your own tornadoes, anywhere.",
+              "localeCode": "en-US"
+            },
+            {
+              "id": "product#1#description",
+              "object": "segment",
+              "value": "Créez facilement et n'importe où, vos propres tornades.",
+              "localeCode": "fr"
+            }
+          ]
+        }
+      }
+
+      ```
+  - name: System
 paths:
   /echo:
     $ref: paths/echo.yaml
@@ -55,6 +112,6 @@ paths:
 components:
   securitySchemes:
     bearerAuth:
-      type: apiKey
-      name: authorization
-      in: header
+      type: http
+      scheme: bearer
+      name: Authorization

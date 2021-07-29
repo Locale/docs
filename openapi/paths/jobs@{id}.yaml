@@ -1,7 +1,7 @@
 get:
   tags:
     - Job
-  summary: Get translation job by id.
+  summary: Retrieve a translation job.
   description: |
     Retrieve a translation job by its id.
   operationId: getJobById
@@ -16,7 +16,7 @@ get:
         type: string
   responses:
     '200':
-      description: successful operation
+      description: OK
       content:
         application/json:
           schema:

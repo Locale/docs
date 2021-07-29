@@ -1,4 +1,36 @@
 type: object
+required:
+  - id
+  - object
+  - status
+  - livemode
 properties:
-  data:
-    $ref: ./JobResponse_data.yaml
+  id:
+    type: string
+    format: uuid
+    example: job_RH4lg43DvWW
+    description: Unique identifier for the object.
+  object:
+    type: string
+    description: String representing the object's type. Objects of the same type share the same value.
+    enum:
+      - job
+  status:
+    type: string
+    description: The status of the job is either `inProgress`, `delivered`, or `failed`
+    enum:
+      - delivered
+      - failed
+      - inProgress
+  livemode:
+    type: boolean
+    description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+  links:
+    type: object
+    description: Links related to the object.
+    properties:
+      download:
+        type: string
+        description: The URL to download the job result.
+        format: url
+        example: https://files.locale.to?signature=1234ABC

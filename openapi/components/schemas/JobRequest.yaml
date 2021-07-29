@@ -1,4 +1,8 @@
-type: object
+type: object 
+required:
+  - segments
 properties:
-  data:
-    $ref: ./JobRequest_data.yaml
+  segments:
+    type: array
+    items:
+      $ref: ./SegmentData.yaml

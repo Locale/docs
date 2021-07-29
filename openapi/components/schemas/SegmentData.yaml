@@ -1,7 +1,6 @@
 type: object
 required:
   - id
-  - object
   - value
   - localeCode
 properties:
@@ -9,11 +8,6 @@ properties:
     type: string
     description: Unique identifier for the segment.
     example: page.home.title
-  object:
-    type: string
-    enum:
-      - job
-    description: String representing the object's type. Objects of the same type share the same value.
   value:
     type: string
     description: Value to translate or to proofread.
