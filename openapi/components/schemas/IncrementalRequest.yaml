@@ -1,0 +1,23 @@
+type: object
+required:
+  - current
+  - previous
+properties:
+  current:
+    required:
+      - segments
+    type: object
+    properties:
+      segments:
+        type: array
+        items:
+          $ref: ./SegmentData.yaml
+  previous:
+    required:
+      - segments
+    type: object
+    properties:
+      segments:
+        type: array
+        items:
+          $ref: ./SegmentData.yaml

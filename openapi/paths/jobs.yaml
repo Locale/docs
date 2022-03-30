@@ -3,33 +3,76 @@ post:
     - Job
   summary: Create a translation job.
   description: >
-    Trigger a new translation that will be processed in all languages set up on
-    your project.
+    Trigger a new translation that will be processed in all languages set up on your project.
   operationId: createJob
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/JobRequest.yaml
-        example:
-          segments:
-            - id: product#1#name
-              value: ACME DIY Tornado Kit
-              localeCode: en-US
-            - id: product#1#description
-              value: >-
-                Easily create your own tornadoes, anywhere, with the ACME Do
-                It Yourself Tornado kit
-              localeCode: en-US
-            - id: product#2#name
-              value: ACME Birdseed
-              localeCode: en-US
-            - id: product#2#description
-              value: >-
-                Comes in all shapes, sizes, and flavors, providing lots of
-                opportunites to keep your favorite flying friends happy.
-                Placing ACME Birdseed on a railroad crossing is NOT advised
-              localeCode: en-US
+          anyOf:
+            - $ref: ../components/schemas/SynchronizationRequest.yaml
+            - $ref: ../components/schemas/IncrementalRequest.yaml
+        examples:
+          Synchronization:
+            value:
+              segments:
+                - id: product#1#name
+                  value: ACME DIY Tornado Kit
+                  localeCode: en-US
+                - id: product#1#description
+                  value: >-
+                    Easily create your own tornadoes, anywhere, with the ACME Do
+                    It Yourself Tornado kit
+                  localeCode: en-US
+                - id: product#2#name
+                  value: ACME Birdseed
+                  localeCode: en-US
+                - id: product#2#description
+                  value: >-
+                    Comes in all shapes, sizes, and flavors, providing lots of
+                    opportunites to keep your favorite flying friends happy.
+                    Placing ACME Birdseed on a railroad crossing is NOT advised
+                  localeCode: en-US
+          Incremental:
+            value:
+              current:
+                segments:
+                  - id: product#1#name
+                    value: (Current) ACME DIY Tornado Kit
+                    localeCode: en-US
+                  - id: product#1#description
+                    value: >-
+                      (Current) Easily create your own tornadoes, anywhere, with the ACME Do
+                      It Yourself Tornado kit
+                    localeCode: en-US
+                  - id: product#2#name
+                    value: (Current) ACME Birdseed
+                    localeCode: en-US
+                  - id: product#2#description
+                    value: >-
+                      (Current) Comes in all shapes, sizes, and flavors, providing lots of
+                      opportunites to keep your favorite flying friends happy.
+                      Placing ACME Birdseed on a railroad crossing is NOT advised
+                    localeCode: en-US
+              previous:
+                segments:
+                  - id: product#1#name
+                    value: (Previous)  ACME DIY Tornado Kit
+                    localeCode: en-US
+                  - id: product#1#description
+                    value: >-
+                      (Previous) Easily create your own tornadoes, anywhere, with the ACME Do
+                      It Yourself Tornado kit
+                    localeCode: en-US
+                  - id: product#2#name
+                    value: (Previous) ACME Birdseed
+                    localeCode: en-US
+                  - id: product#2#description
+                    value: >-
+                      (Previous) Comes in all shapes, sizes, and flavors, providing lots of
+                      opportunites to keep your favorite flying friends happy.
+                      Placing ACME Birdseed on a railroad crossing is NOT advised
+                    localeCode: en-US
     required: true
   responses:
     '201':
